@@ -5,6 +5,7 @@ pipeline {
     environment {
         AWS_ECR_LOGIN = 'true'
         DOCKER_CONFIG= "${params.JENKINSHOME}"
+        END_POINT = 'scikit-byo'
     }
 
     stages {
@@ -85,16 +86,26 @@ pipeline {
               """
              }
         }
-
-      stage("TestEvaluate") {
-            steps { 
-              script {
-                 def response = sh """ 
-                 aws lambda invoke --function-name ${params.LAMBDA_EVALUATE_MODEL} --cli-binary-format raw-in-base64-out --region us-east-1 --payload '{"EndpointName": "'${params.SAGEMAKER_TRAINING_JOB}-${env.BUILD_ID}'-Test", "Body": {"Payload": {"S3TestData": "${params.S3_TEST_DATA}", "S3Key": "test/iris.csv"}}}' evalresponse.json
-              """
-              }
-            }
-        }
+	    
+	stage("TestEvaluate") {
+		    steps { 
+			script {
+					    sh 'echo "Invoking Lambda for Testing Endpoint"'
+						result = invokeLambda(
+								functionName: "${params.LAMBDA_EVALUATE_MODEL}" ,
+								payload: [ "EndpointName": "${env.END_POINT}-Test","Env": "Test", "S3TestData":  "${params.S3_TEST_DATA}", "S3Key": "test.csv" ],
+								returnValueAsString: true
+						)
+						if (result.contains("success")){
+						   echo 'The Test Endpoint has Succeded'					    
+						}
+						else{
+						    error 'The Test End Point did not succeed'
+						}
+					}
+		    }
+		      }
+	
 
       stage("DeployToProd") {
             steps { 
