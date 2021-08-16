@@ -9,6 +9,7 @@ pipeline {
 	LAMBDA_EVALUATE_MODEL = 'MLOps-InvokeEndpoint-scikitbyo'
 	TRAIN_FILE = 'train.csv'
 	TEST_FILE = 'test.csv'
+	AWS_REGION = 'us-east-1'
     }
 
     stages {
@@ -38,8 +39,9 @@ pipeline {
 	       --role-arn ${params.SAGEMAKER_EXECUTION_ROLE_TEST} \
 	       --input-data-config '{"ChannelName": "training", "DataSource": { "S3DataSource": { "S3DataType": "S3Prefix", "S3Uri": "s3://${params.S3_TRAIN_DATA}/${env.TRAIN_FILE}"}}}' \
 	       --resource-config InstanceType='ml.c4.2xlarge',InstanceCount=1,VolumeSizeInGB=5 \
-	       --output-data-config S3OutputPath='${S3_MODEL_ARTIFACTS}' \
+	       --output-data-config S3OutputPath='${params.S3_MODEL_ARTIFACTS}' \
 	       --stopping-condition MaxRuntimeInSeconds=3600 \
+	       --region='${env.AWS_REGION}'
               """
              }
         }
