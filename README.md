@@ -230,48 +230,35 @@ In this step, we will create a new pipeline that we'll use to:
 
  * We're going to use the same process above to create the other configurable parameters we will use as input into our pipeline. Select **Add Parameter** each time to continue to add the additional parameters below: 
 
-   *  Parameter #2: Lambda Execution Role
-       - **Type:** String
-       - **Name:** LAMBDA_EXECUTION_ROLE_TEST
-       - **Default Value:** arn:aws:iam::*<InsertAccount#>*:role/MLOps-Jenkins-LambdaExecution
-
-       *Tip: Your account number can be found in the ECRURI above*
-
-   * Parameter #3: SageMaker Execution Role 
+    * Parameter #2: SageMaker Execution Role 
        - **Type:** String
        - **Name:** SAGEMAKER_EXECUTION_ROLE_TEST
        - **Default Value:** *Enter the ARN of the role we created above*
 
-   * Parameter #4: Model Artifact Bucket 
+   * Parameter #3: Model Artifact Bucket 
        - **Type:** String
        - **Name:** S3_MODEL_ARTIFACTS
        - **Default Value:** *Enter the bucket we created above in the format: s3://*initials*-jenkins-scikitbyo-modelartifact
 
-   * Parameter #5: Training Job Name 
+   * Parameter #4: Training Job Name 
        - **Type:** String
        - **Name:** SAGEMAKER_TRAINING_JOB
        - **Default Value:** scikit-byo-*yourinitials*
 
-    * Parameter #6: S3 Bucket w/ Training Data
+    * Parameter #5: S3 Bucket w/ Training Data
        - **Type:** String
        - **Name:** S3_TRAIN_DATA
        - **Default Value:** s3://*yourinitials*-jenkins-scikitbyo-data/train.csv   
 
-    * Parameter #7: S3 Bucket w/ Training Data
+    * Parameter #6: S3 Bucket w/ Training Data (Just the Bucket Name)
        - **Type:** String
        - **Name:** S3_TEST_DATA
        - **Default Value:** *yourinitials*-jenkins-scikitbyo-data    
 
-    * Parameter #8: Lambda Function - Smoke Test
+    * Parameter #7: Lambda Function - Smoke Test
        - **Type:** String
        - **Name:** LAMBDA_EVALUATE_MODEL
        - **Default Value:** MLOps-InvokeEndpoint-scikitbyo
-
-   * Parameter #9: Default Docker Environment
-       - **Type:** String
-       - **Name:** JENKINSHOME
-       - **Default Value:** /bitnami/jenkins/jenkins_home/.docker
-   
 
 5) Scroll down --> Under **Build Triggers** tab: 
 
