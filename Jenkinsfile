@@ -4,7 +4,6 @@ pipeline {
 
     environment {
         AWS_ECR_LOGIN = 'true'
-        DOCKER_CONFIG= "${params.JENKINSHOME}"
         END_POINT = 'scikit-byo'
     }
 
