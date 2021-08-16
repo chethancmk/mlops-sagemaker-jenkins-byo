@@ -212,7 +212,7 @@ In this step, we will create a new pipeline that we'll use to:
 
 5) Under **General** tab, complete the following: 
 
-* **Description:** Enter a description for the pipeline
+* **Description:** Enter a description for the pipeline as "Basic Jenkins End to End Pipeline using Amazon Sagemaker Training and Hosting"
 
 * Select **GitHub project** & Enter the following project url:: https://github.com/chethancmk/mlops-sagemaker-jenkins-byo
 
