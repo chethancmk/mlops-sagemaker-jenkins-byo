@@ -164,10 +164,12 @@ Create the IAM Role we will use for executing SageMaker calls from our Jenkins p
 
 In this step, we'll create the Lambda Helper Functions that to facilitate the integration of SageMaker training and deployment into a Jenkins pipeline:
 
-1. Go to **Services** -> Select **Lambda**
-2. Create a function MLOps-InvokeEndpoint-scikitbyo with Python 3.8 as the run time. 
-3. Upload the lambda zip code from the /lambdas folder of this repo  [Github Link](https://github.com/chethancmk/mlops-sagemaker-jenkins-byo/tree/master/lambda)
-4. Update the Lambda permissions to have access to S3, Sagemaker and Clouwatch
+1) Go to **Services** -> Select **Lambda**
+
+2) Create a function MLOps-InvokeEndpoint-scikitbyo with Python 3.8 as the run time and Permissions with TeamRole . 
+
+3) Upload the lambda zip code from the /lambdas folder of this repo  [Github Link](https://github.com/chethancmk/mlops-sagemaker-jenkins-byo/tree/master/lambda)
+
 
 The description of each Lambda function is included below:
  
