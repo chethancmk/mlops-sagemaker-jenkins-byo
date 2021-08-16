@@ -238,7 +238,7 @@ In this step, we will create a new pipeline that we'll use to:
    * Parameter #3: Model Artifact Bucket 
        - **Type:** String
        - **Name:** S3_MODEL_ARTIFACTS
-       - **Default Value:** *Enter the bucket we created above in the format: s3://*initials*-jenkins-scikitbyo-modelartifact
+       - **Default Value:** *Enter the bucket we created above
 
     * Parameter #4: S3 Bucket w/ Training and Test Data
        - **Type:** String
