@@ -240,25 +240,11 @@ In this step, we will create a new pipeline that we'll use to:
        - **Name:** S3_MODEL_ARTIFACTS
        - **Default Value:** *Enter the bucket we created above in the format: s3://*initials*-jenkins-scikitbyo-modelartifact
 
-   * Parameter #4: Training Job Name 
+    * Parameter #5: S3 Bucket w/ Training and Test Data
        - **Type:** String
-       - **Name:** SAGEMAKER_TRAINING_JOB
-       - **Default Value:** scikit-byo-*yourinitials*
+       - **Name:** S3_DATA_BUCKET
+       - **Default Value: *yourinitials*-jenkins-scikitbyo-data
 
-    * Parameter #5: S3 Bucket w/ Training Data
-       - **Type:** String
-       - **Name:** S3_TRAIN_DATA
-       - **Default Value:** s3://*yourinitials*-jenkins-scikitbyo-data/train.csv   
-
-    * Parameter #6: S3 Bucket w/ Training Data (Just the Bucket Name)
-       - **Type:** String
-       - **Name:** S3_TEST_DATA
-       - **Default Value:** *yourinitials*-jenkins-scikitbyo-data    
-
-    * Parameter #7: Lambda Function - Smoke Test
-       - **Type:** String
-       - **Name:** LAMBDA_EVALUATE_MODEL
-       - **Default Value:** MLOps-InvokeEndpoint-scikitbyo
 
 5) Scroll down --> Under **Build Triggers** tab: 
 
