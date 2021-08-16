@@ -123,7 +123,7 @@ Create the S3 bucket that we will use for storing our test and train data.  The 
  
    * **Bucket name:** *yourinitials*-jenkins-scikitbyo-data
      
-      *Example: jd-jenkins-scikitbyo-modelartifact*
+      *Example: jd-jenkins-scikitbyo-data*
 
    * Leave all other settings as default, click **Create bucket**
    
