@@ -212,7 +212,7 @@ In this step, we will create a new pipeline that we'll use to:
 
 * **Description:** Enter a description for the pipeline
 
-* Select **GitHub project** & Enter the following project url: https://github.com/seigenbrode/mlops-sagemaker-jenkins-byo
+* Select **GitHub project** & Enter the following project url: https://github.com/chethancmk/mlops-sagemaker-jenkins-byo
 
 
 ![BYO Workshop Setup](images/Jenkins-NewItem-1.png)
@@ -281,9 +281,9 @@ In this step, we will create a new pipeline that we'll use to:
 
    * **SCM:** Select **Git** from dropdown
 
-   * **Repository URL:** https://github.com/seigenbrode/mlops-sagemaker-jenkins-byo
-
-   * **Branches to Build:** */main
+   * **Repository URL:** https://github.com/chethancmk/mlops-sagemaker-jenkins-byo
+   
+   * **Branches to Build:** */master
 
    * **Credentials:** -none- *We are pulling from a public repo* 
 
