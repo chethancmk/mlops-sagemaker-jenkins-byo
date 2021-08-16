@@ -93,7 +93,7 @@ pipeline {
 					    sh 'echo "Invoking Lambda for Testing Endpoint"'
 						result = invokeLambda(
 								functionName: "MLOps-InvokeEndpoint-scikitbyo" ,
-								payload: [ "EndpointName": "${env.END_POINT}-Test","Env": "Test", "S3TestData":  "${params.cmunikri2-jenkins-scikitbyo-data}", "S3Key": "test.csv" ],
+								payload: [ "EndpointName": "${env.END_POINT}-Test","Env": "Test", "S3TestData":  "${params.S3_TEST_DATA}", "S3Key": "test.csv" ],
 								returnValueAsString: true
 						)
 						if (result.contains("success")){
