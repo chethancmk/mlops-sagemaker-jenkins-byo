@@ -4,7 +4,7 @@ pipeline {
 
     environment {
         AWS_ECR_LOGIN = 'true'
-        END_POINT = 'jenkins-scikit-byo'
+        END_POINT = 'scikit-byo'
 	SAGEMAKER_TRAINING_JOB = 'jenkins-scikit-byo'
 	LAMBDA_EVALUATE_MODEL = 'MLOps-InvokeEndpoint-scikitbyo'
 	TRAIN_FILE = 'train.csv'
