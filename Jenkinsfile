@@ -33,7 +33,7 @@ pipeline {
         stage("TrainModel") {
             steps { 
               sh """
-               aws sagemaker create-training-job --training-job-name ${env.SAGEMAKER_TRAINING_JOB}-${env.BUILD_ID} \
+               aws sagemaker create-training-job --training-job-name ${env.SAGEMAKER_TRAINING_JOB}-${env.BUILD_ID}-${currentBuild.startTimeInMillis} \
 	       --algorithm-specification TrainingImage="${params.ECRURI}:${env.BUILD_ID}",TrainingInputMode="File" \
 	       --role-arn ${params.SAGEMAKER_EXECUTION_ROLE_TEST} \
 	       --input-data-config '{"ChannelName": "training", "DataSource": { "S3DataSource": { "S3DataType": "S3Prefix", "S3Uri": "s3://${params.S3_DATA_BUCKET}/${env.TRAIN_FILE}"}}}' \
