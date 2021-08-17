@@ -78,27 +78,29 @@ The steps below are included for the setup of AWS resources we will be using in 
 We will create jenkins server from a pre-baked Machine Image. This contains all the required plugins and softwares (Docker,Git) preinstalled.
 
  1) Download the cloudformation template for [Jenkins Server](https://github.com/chethancmk/mlops-sagemaker-jenkins-byo/blob/master/deploy/cfn-jenkins-server.yml) to your  local machine.
- 2) Open the AWS Console (N Virginia - us-east-1) and Open the console for Cloudformation. Select create stack with new resources on the top right hand menu
- 3) Select Upload a template file and Click the button to 'Choose File' that you downloaded into your local machine . Click Next
- 4) Enter Stack name as 'Jenkins-Server' . Click Next
- 5) Do not change anything here . Click Next
- 6) Scroll to the bottom. Select the checkbox "I acknowledge that AWS CloudFormation might create IAM resources." . Click Create Stack
- 7) Wait for the stack to be created and then in the output tab get the IP Address for the server
- 8) The Jenkins server is accessible at the link http://<Your Jenkins IP>:8080
- 9) Ask your lab instructor for the default userid and password
+ 2) From your AWS Account, go to **Services**-->**CloudFormation** in the region N Virginia (us-east-1) 
+ 3) Select create stack with new resources on the top right hand menu
+ 4) Select Upload a template file and Click the button to 'Choose File' that you downloaded into your local machine . Click Next
+ 5) Enter Stack name as 'Jenkins-Server' . Click Next
+ 6) Do not change anything here . Click Next
+ 7) Scroll to the bottom. Select the checkbox "I acknowledge that AWS CloudFormation might create IAM resources." . Click Create Stack
+ 8) Wait for the stack to be created and then in the output tab get the IP Address for the server
+ 9) The Jenkins server is accessible at the link http://<Your Jenkins IP>:8080
+ 10) Ask your lab instructor for the default userid and password
  
 ## Step 2: Create ECR Repo, S3 Buckets and Lambda Function
  
 We will next create the required resources for the Lab which includes a ECR Repository for storing the custom Train/Test Image. S3 Buckets to store the Model Artifact and Training Data. Lambda Function to Evaluate/Test the Model Endpoint along with required Roles.
 
  1) Download the cloudformation template for [MLOps w/ Jenkins Resources](https://github.com/chethancmk/mlops-sagemaker-jenkins-byo/blob/master/deploy  /cfn_mlops_jenkins_resources.yml) to your local machine.
- 2) Open the AWS Console (N Virginia - us-east-1) and Open the console for Cloudformation. Select create stack with new resources on the top right hand menu
- 3) Select Upload a template file and Click the button to 'Choose File' that you downloaded into your local machine . Click Next
- 4) Enter Stack name as 'MLOps-Jenkins'. Enter Unique bucket names for storing Model Artifact ({initials}-jenkins-scikitbyo-modelartifact
+ 2) From your AWS Account, go to **Services**-->**CloudFormation** in the region N Virginia (us-east-1).
+ 3) Select create stack with new resources on the top right hand menu
+ 4) Select Upload a template file and Click the button to 'Choose File' that you downloaded into your local machine . Click Next
+ 5) Enter Stack name as 'MLOps-Jenkins'. Enter Unique bucket names for storing Model Artifact ({initials}-jenkins-scikitbyo-modelartifact
  ) and Model Data ({initials}-jenkins-scikitbyo-data). Click Next
- 5) Do not change anything here . Click Next
- 6) Scroll to the bottom. Select the checkbox "I acknowledge that AWS CloudFormation might create IAM resources." . Click Create Stack 
- 7) Wait for the stack to be created and then in the output tab the parameters required for configuring the pipeline will be available. The values include (ECR Repository, Sagemaker Execution Role, S3 Buckets for Data and Model Artifact) Copy the values for reference later
+ 6) Do not change anything here . Click Next
+ 7) Scroll to the bottom. Select the checkbox "I acknowledge that AWS CloudFormation might create IAM resources." . Click Create Stack 
+ 8) Wait for the stack to be created and then in the output tab the parameters required for configuring the pipeline will be available. The values include (ECR Repository, Sagemaker Execution Role, S3 Buckets for Data and Model Artifact) Copy the values for reference later
  ![CFN Output](images/Jenkins_resources_output.PNG)
  
 ## Step 3: Copy Testing and Train Data to the training bucket
@@ -118,16 +120,11 @@ Follow these Steps if you are running on your own Cloudformation is not used
 In this workshop, we are using Jenkins as the Docker build server; however, you can also choose to use a secondary build environment such as [AWS Code Build](https://aws.amazon.com/codebuild) as a managed build environment that also integrates with other orchestration tools such as Jenkins. Below we are creating an Elastic Container Registry (ECR) where we will push our built docker images. This images we push to this registry will become input container images used for our SageMaker training and deployment.   
 
 1) Login to the AWS Account provided
-
 2) Verify you are in **us-east-1/N.Virginia**
-
 3) Go to **Services** -> Select **Elastic Container Registry**
-
 4) Select **Create repository**
-
    * For **Repository name**: Enter a name (ex. jenkins-byo-scikit-janedoe)
    * Toggle the **Image scan settings** to **Enabled**  (*This will allow for automatic vulnerability scans against images we push to this repository*)
-
 
 ![BYO Workshop Setup](images/ECR-Repo.png)
 
@@ -140,9 +137,7 @@ In this workshop, we are using Jenkins as the Docker build server; however, you 
 Create the S3 bucket that we will use as our packaged model artifact repository.  Once our SageMaker training job completes successfully, a new deployable model artifact will be PUT to this bucket. In this lab, we version our artifacts using the consistent naming of the build pipeline ID.  However, you can optionally enable versioning on the S3 bucket as well.  
 
 1) From your AWS Account, go to **Services**-->**S3**
-
 2) Click  **Create bucket**
-
 3) Under **Create Bucket / General Configuration**:
  
    * **Bucket name:** *yourinitials*-jenkins-scikitbyo-modelartifact
@@ -156,9 +151,7 @@ Create the S3 bucket that we will use as our packaged model artifact repository.
 Create the S3 bucket that we will use for storing our test and train data.  The training job will use the train.csv from the bucket to train the model. The testing lambda function will use the test.csv to smoke test the end point
 
 1) From your AWS Account, go to **Services**-->**S3**
-
 2) Click  **Create bucket**
-
 3) Under **Create Bucket / General Configuration**:
  
    * **Bucket name:** *yourinitials*-jenkins-scikitbyo-data
@@ -174,28 +167,21 @@ Create the S3 bucket that we will use for storing our test and train data.  The 
 Create the IAM Role we will use for executing SageMaker calls from our Jenkins pipeline  
 
 1) From your AWS Account, go to **Services**-->**IAM**
-
 2) Select **Roles** from the menu on the left, then click **Create role**
 3) Select **AWS service**, then **SageMaker**
-
 4) Click **Next: Permissions**
-
 5) Click **Next: Tags**
-
 6) Click **Next: Review**
-
 7) Under **Review**:
-
+ 
  * **Role name:** MLOps-Jenkins-SageMaker-ExecutionRole-*YourInitials*
 
 8) Click **Create role**
-
 9) You will receive a notice the role has been created, click on the link to the role and make sure grab the arn for the role we just created as we will use it later. 
 
 ![BYO Workshop Setup](images/SageMaker-IAM.png)
 
 10) We want to ensure we have access to S3 as well, so under the **Permissions** tab, click **Attach policies**
-
 11) Type **S3** in the search bar and click the box next to 'AmazonS3FullAccess', click **Attach policy**
 
 *Note: In a real world scenario, we would want to limit these privileges significantly to only the privileges needed.  This is only done for simplicity in the workshop.*
@@ -205,9 +191,7 @@ Create the IAM Role we will use for executing SageMaker calls from our Jenkins p
 In this step, we'll create the Lambda Helper Functions that to facilitate the integration of SageMaker training and deployment into a Jenkins pipeline:
 
 1) Go to **Services** -> Select **Lambda**
-
 2) Create a function MLOps-InvokeEndpoint-scikitbyo with Python 3.8 as the run time and Permissions with TeamRole . 
-
 3) Upload the lambda zip code from the /lambdas folder of this repo  [Github Link](https://github.com/chethancmk/mlops-sagemaker-jenkins-byo/tree/master/lambda)
 
 
@@ -223,25 +207,17 @@ The description of each Lambda function is included below:
 In this step, we will create a new pipeline that we'll use to:
 
    1) Pull updated training/inference code
-
    2) Create a docker image
-
    3) Push docker image to our ECR
-
-   4) Train our model using Amazon SageMaker Training Instances
-    
+   4) Train our model using Amazon SageMaker Training Instances    
    5) Deploy our model to a Test endpoint using CloudFormaton to deploy to Amazon SageMaker Hosting Instances 
-
    6) Execute a smoke test to ensure our training and inference code are in sync
-
    7) Deploy our model to a Production endpoint using CloudFormaton to deploy to Amazon SageMaker Hosting Instances
 
 ## Step 5: Configure the Jenkins Pipeline
 
 1) Login Jenkins portal using the information provided by your instructors
-
 2) From the left menu, choose **New Item** 
-
 3) **Enter Item Name:** sagemaker-byo-pipeline-*yourinitials* 
 
     *Example: sagemaker-byo-pipeline-jd
@@ -339,9 +315,7 @@ Jenkins allows for the ability to create additional pipeline triggers and embed 
 
 
 6. When your pipeline reaches the **TrainModel** stage, you can checkout more details about your model training within SageMaker.  While we use Jenkins to orchestrate the kickoff of our training, we are still utilizing Amazon SageMaker training features &  instances for this step.  Go To [Amazon SageMaker Training Jobs](https://console.aws.amazon.com/sagemaker/home?region=us-east-1#/jobs).  You can click on your job and review the details of your training job as well as check out the system monitoring metrics.  
-
 7. When the pipeline has completed the **TrainStatus** stage, the model has been trained and you will be able to find your deployable model artifact in the S3 bucket we created earlier.  Go To [S3](https://s3.console.aws.amazon.com/s3/home?region=us-east-1) and find your bucket to view your model artifact: *yourinitials*-jenkins-scitkitbyo-modelartifact
-
 8. When the pipeline has completed, the model that was trained once is deployed to test, run through a smoke test, and deploy to production.  Go to [Amazon SageMaker Endpoints](https://console.aws.amazon.com/sagemaker/home?region=us-east-1#/endpoints) to check out your endpoints.  
 
 ![BYO Workshop Setup](images/SageMaker-Endpoints.png)
