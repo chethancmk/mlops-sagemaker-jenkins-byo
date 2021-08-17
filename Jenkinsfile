@@ -49,10 +49,10 @@ pipeline {
             steps {
               script {
                     def response = sh """ 
-                    TrainingJobStatus=`aws sagemaker describe-training-job --region '${env.AWS_REGION}' --training-job-name \"${env.SAGEMAKER_TRAINING_JOB}-${env.BUILD_ID}\" | grep -Po \'"\'"TrainingJobStatus"\'"\\s*:\\s*"\\K([^"]*)\'`
+                    TrainingJobStatus=`aws sagemaker describe-training-job --region '${env.AWS_REGION}' --training-job-name \"${env.SAGEMAKER_TRAINING_JOB}-${env.BUILD_ID}-${currentBuild.startTimeInMillis}\" | grep -Po \'"\'"TrainingJobStatus"\'"\\s*:\\s*"\\K([^"]*)\'`
                     echo \$TrainingJobStatus
                     while [ \$TrainingJobStatus = "InProgress" ] ; do
-                      TrainingJobStatus=`aws sagemaker describe-training-job --region '${env.AWS_REGION}' --training-job-name \"${env.SAGEMAKER_TRAINING_JOB}-${env.BUILD_ID}\" | grep -Po \'"\'"TrainingJobStatus"\'"\\s*:\\s*"\\K([^"]*)\'`
+                      TrainingJobStatus=`aws sagemaker describe-training-job --region '${env.AWS_REGION}' --training-job-name \"${env.SAGEMAKER_TRAINING_JOB}-${env.BUILD_ID}-${currentBuild.startTimeInMillis}\" | grep -Po \'"\'"TrainingJobStatus"\'"\\s*:\\s*"\\K([^"]*)\'`
                       echo \$TrainingJobStatus
                       sleep 1m
                     done
