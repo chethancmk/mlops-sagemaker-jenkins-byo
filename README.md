@@ -69,9 +69,28 @@ For this lab, we will perform a lot of steps manually in AWS that would typicall
 
 ---
 
-# Workshop Setup & Preparation
+# Workshop Setup & Preparation (Including Jenkins Server) - Cloudformation
 
 The steps below are included for the setup of AWS resources we will be using in the lab environment.
+
+## Step 1: Create a standalone jenkins server on EC2
+
+We will create jenkins server from a pre-baked Machine Image. This contains all the required plugins and softwares (Docker,Git) preinstalled.
+
+1) Download the cloudformation template for [Jenkins Server](https://github.com/chethancmk/mlops-sagemaker-jenkins-byo/blob/master/deploy/cfn-jenkins-server.yml) to your local machine .
+2) Open the AWS Console (N Virginia - us-east-1) and Open the console for Cloudformation. Select create stack with new resources on the top right hand menu
+3) Select Upload a template file and Click the button to 'Choose File' that you downloaded into your local machine . Click Next
+4) Enter Stack name as 'Jenkins-Server' . Click Next
+5) Do not change anything here . Click Next
+6) Scroll to the bottom. Select the checkbox "I acknowledge that AWS CloudFormation might create IAM resources." . Click Create Stack
+7) Wait for the stack to be created and then in the output tab get the IP Address for the server
+8) The Jenkins server is accessible at the link http://<Your Jenkins IP>:8080
+9) Ask your lab instructor for the default userid and password
+
+---
+
+# Workshop Setup & Preparation - Manual
+Follow these Steps if Cloudformation is not used
 
 ## Step 1: Create Elastic Container Registry (ECR)
 
