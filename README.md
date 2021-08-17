@@ -96,11 +96,12 @@ We will next create the required resources for the Lab which includes a ECR Repo
  2) From your AWS Account, go to **Services**-->**CloudFormation** in the region N Virginia (us-east-1).
  3) Select create stack with new resources on the top right hand menu
  4) Select Upload a template file and Click the button to 'Choose File' that you downloaded into your local machine . Click Next
- 5) Enter Stack name as 'MLOps-Jenkins'. Enter Unique bucket names for storing Model Artifact ({initials}-jenkins-scikitbyo-modelartifact
- ) and Model Data ({initials}-jenkins-scikitbyo-data). Click Next
+ 5) Enter Stack name as 'MLOps-Jenkins'. Enter Unique bucket names for storing Model Artifact (*yourinitials*-jenkins-scikitbyo-modelartifact
+ ) and Model Data (*yourinitials*-jenkins-scikitbyo-data). Click Next
  6) Do not change anything here . Click Next
  7) Scroll to the bottom. Select the checkbox "I acknowledge that AWS CloudFormation might create IAM resources." . Click Create Stack 
  8) Wait for the stack to be created and then in the output tab the parameters required for configuring the pipeline will be available. The values include (ECR Repository, Sagemaker Execution Role, S3 Buckets for Data and Model Artifact) Copy the values for reference later
+ 
  ![CFN Output](images/Jenkins_resources_output.PNG)
  
 ## Step 3: Copy Testing and Train Data to the training bucket
@@ -246,12 +247,12 @@ In this step, we will create a new pipeline that we'll use to:
    * Parameter #3: Model Artifact Bucket 
        - **Type:** String
        - **Name:** S3_MODEL_ARTIFACTS
-       - **Default Value:** *Enter the bucket we created above
-
+       - **Default Value:** *yourinitials*-jenkins-scikitbyo-modelartifact
+ 
     * Parameter #4: S3 Bucket w/ Training and Test Data
        - **Type:** String
        - **Name:** S3_DATA_BUCKET
-       - **Default Value: *yourinitials*-jenkins-scikitbyo-data
+       - **Default Value:** *yourinitials*-jenkins-scikitbyo-data
 
 
 5) Scroll down --> Under **Build Triggers** tab: 
@@ -261,15 +262,10 @@ In this step, we will create a new pipeline that we'll use to:
 6) Scroll down --> Under **Pipeline** tab: 
 
    * Select **Pipeline script from SCM**
-
    * **SCM:** Select **Git** from dropdown
-
-   * **Repository URL:** https://github.com/chethancmk/mlops-sagemaker-jenkins-byo
-   
+   * **Repository URL:** https://github.com/chethancmk/mlops-sagemaker-jenkins-byo   
    * **Branches to Build:** */master
-
    * **Credentials:** -none- *We are pulling from a public repo* 
-
    * **Script Path:** *Ensure 'Jenkinsfile' is populated*
 
 7) Leave all other values default and click **Save**
