@@ -140,10 +140,8 @@ Create the S3 bucket that we will use as our packaged model artifact repository.
 2) Click  **Create bucket**
 3) Under **Create Bucket / General Configuration**:
  
-   * **Bucket name:** *yourinitials*-jenkins-scikitbyo-modelartifact
-     
+   * **Bucket name:** *yourinitials*-jenkins-scikitbyo-modelartifact     
       *Example: jd-jenkins-scikitbyo-modelartifact*
-
    * Leave all other settings as default, click **Create bucket**
 
 ## Step 3: Create Bucket for Training/Testing Data. Copy files to the Bucket
@@ -154,10 +152,8 @@ Create the S3 bucket that we will use for storing our test and train data.  The 
 2) Click  **Create bucket**
 3) Under **Create Bucket / General Configuration**:
  
-   * **Bucket name:** *yourinitials*-jenkins-scikitbyo-data
-     
+   * **Bucket name:** *yourinitials*-jenkins-scikitbyo-data     
       *Example: jd-jenkins-scikitbyo-data*
-
    * Leave all other settings as default, click **Create bucket**
    
  4) Copy the train, test files from the data directory to the bucket. [Data Files](https://github.com/chethancmk/mlops-sagemaker-jenkins-byo/tree/master/data)
@@ -173,9 +169,7 @@ Create the IAM Role we will use for executing SageMaker calls from our Jenkins p
 5) Click **Next: Tags**
 6) Click **Next: Review**
 7) Under **Review**:
- 
- * **Role name:** MLOps-Jenkins-SageMaker-ExecutionRole-*YourInitials*
-
+  * **Role name:** MLOps-Jenkins-SageMaker-ExecutionRole-*YourInitials*
 8) Click **Create role**
 9) You will receive a notice the role has been created, click on the link to the role and make sure grab the arn for the role we just created as we will use it later. 
 
@@ -183,7 +177,6 @@ Create the IAM Role we will use for executing SageMaker calls from our Jenkins p
 
 10) We want to ensure we have access to S3 as well, so under the **Permissions** tab, click **Attach policies**
 11) Type **S3** in the search bar and click the box next to 'AmazonS3FullAccess', click **Attach policy**
-
 *Note: In a real world scenario, we would want to limit these privileges significantly to only the privileges needed.  This is only done for simplicity in the workshop.*
 
 ## Step 5: Create the Lambda Helper function
@@ -198,7 +191,6 @@ In this step, we'll create the Lambda Helper Functions that to facilitate the in
 The description of each Lambda function is included below:
  
 -	**MLOps-InvokeEndpoint-scikitbyo:** This Lambda function is triggered during our "TestEvaluate" stage in the pipeline where we are checking to ensure that our inference code is in sync with our training code by running a few sample requests for prediction to the deployed test endpoint.  We are running this step before committing our newly trained model to a higher level environment.  
-
 
 ---
 
