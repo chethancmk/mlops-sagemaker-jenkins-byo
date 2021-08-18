@@ -63,7 +63,7 @@ Using the same code (with some minor modifications) from the SageMaker example n
 
 This lab will walk you through the steps required to setup a base pipeline responsible for orchestration of workflow to build and deploy custom ML models to target environments
 
-For this lab, we will perform a lot of steps manually in AWS that would typically be performed through Infrastructure-as-Code using a service like [CloudFormation](https://aws.amazon.com/cloudformation/). For the purposes of the lab, we will go step-by-step on the console so attendees become more familiar with expected inputs and artifacts part of a ML deployment pipeline.  
+For this lab, we will provide both the options of doing the steps manually in AWSor through Infrastructure-as-Code using a service like [CloudFormation](https://aws.amazon.com/cloudformation/). For the purposes of the lab chose one of the options.
 
 ## **IMPORTANT:  There are steps in the lab that assume you are using N.Virginia (us-east-1).  Please use us-east-1 for this workshop** 
 
@@ -306,6 +306,9 @@ Jenkins allows for the ability to create additional pipeline triggers and embed 
 
 ![BYO Workshop Setup](images/SageMaker-Endpoints.png)
 
+
+
+
 **CONGRATULATIONS!** 
 
 You've setup your base Jenkins pipeline for building your custom machine learning containers to train and host on Amazon SageMaker.  You can continue to iterate and add in more functionality including items such as: 
@@ -319,6 +322,28 @@ You've setup your base Jenkins pipeline for building your custom machine learnin
  * Include more sophisticated logic in the pipeline such as [Inference Pipeline](https://docs.aws.amazon.com/sagemaker/latest/dg/inference-pipelines.html), [Multi-Model Endpoint](https://docs.aws.amazon.com/sagemaker/latest/dg/multi-model-endpoints.html)
 
 
+
+# Invoking the Endpoint through Public API (Bonus Lab)
+
+This is a bonus step to expose the Inference Endpoint to the external applications using a API Gateway and Lambda. The private endpoint created so far is not public and requires a wrapper for making it available to the external world. Here we create a lambda function and API gateway which takes user input through API tools like postman and returns the inference result. 
+
+![Public API Endpoint](images/apigw-lambda-endpoint.jpg)
+
+
+## Step 1: Create a Cloudformation Stack with API Gateway and Lambda
+
+In this step we will load a cloudformation template to create the resources required to expose the endpoint externally
+
+1) Login to the AWS Account provided
+
+2) Verify you are in **us-east-1/N.Virginia**
+
+3) Go to **Services** -> Select **Cloudformation**
+
+4) Select **Create Stack** -> Select **Cloudformation**
+
+   * For **Repository name**: Enter a name (ex. jenkins-byo-scikit-janedoe)
+   * Toggle the **Image scan settings** to **Enabled**  (*This will allow for automatic vulnerability scans against images we push to this repository*)
 
 ---
 
