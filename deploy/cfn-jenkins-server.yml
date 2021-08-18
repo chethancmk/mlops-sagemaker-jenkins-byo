@@ -1,0 +1,37 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: |
+  "CF Template for Jenkins Server - Sagemaker MLOPs lab"
+Resources:
+  jenkinsSg:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: 'jenkins-server-sg'
+      GroupDescription: "Jenkins Server Security Group"
+      SecurityGroupIngress:
+        - CidrIp: 0.0.0.0/0
+          FromPort: 22
+          IpProtocol: tcp
+          ToPort: 22
+        - CidrIp: 0.0.0.0/0
+          FromPort: 8080
+          IpProtocol: tcp
+          ToPort: 8080
+  MyInstanceProfile: 
+    Type: "AWS::IAM::InstanceProfile"
+    Properties: 
+      Path: "/"
+      Roles: 
+        - TeamRole
+  jenkinsServer:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: ee-default-keypair
+      ImageId: ami-04237c1610c1eb1cb
+      InstanceType: t3.small
+      SecurityGroupIds:
+        - !Ref jenkinsSg
+      IamInstanceProfile: !Ref MyInstanceProfile 
+Outputs:
+  PublicIp:
+    Description: Server Public IP
+    Value: !GetAtt jenkinsServer.PublicIp

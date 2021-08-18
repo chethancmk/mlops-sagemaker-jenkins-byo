@@ -62,7 +62,7 @@ pipeline {
               }
       }
 
-      stage("DeployToTest") {
+       stage("DeployToTest") {
             steps { 
               sh """
                if ! aws cloudformation describe-stacks --region '${env.AWS_REGION}' --stack-name '${env.SAGEMAKER_TRAINING_JOB}'-test ; then
@@ -86,10 +86,8 @@ pipeline {
                       exit \$status
                     fi
                   fi
-
                echo "Waiting for stack update to complete ..."
                aws cloudformation wait stack-update-complete --region '${env.AWS_REGION}' --stack-name '${env.SAGEMAKER_TRAINING_JOB}'-test
-
                fi
                echo "Finished create/update successfully!"
               """

@@ -334,20 +334,38 @@ This is a bonus step to expose the Inference Endpoint to the external applicatio
 
 In this step we will load a cloudformation template to create the resources required to expose the endpoint externally
 
-1) Login to the AWS Account provided
 
-2) Verify you are in **us-east-1/N.Virginia**
+1) Download the Cloudformation template locally [API Gateway+Lambda](https://github.com/chethancmk/mlops-sagemaker-jenkins-byo/blob/master/deploy/cfn_mlops_apigw.yml)
+2) Login to the AWS Account provided
+3) Verify you are in **us-east-1/N.Virginia**
+4) Go to **Services** -> Select **Cloudformation**
+5) Select **Create Stack** -> Select **With New resources**
+6) Upload the template downloaded in step 1
+7) Click Next and Provide a name for the stack (Ex : my-inferences). You can modify the Sagemaker Inference end-point name if required. (Leave it default for the lab)
+8) Click Next and Launch the stack
+9) After the Stack is completely created. Check the output of the stack to see the public endpoint created. Copy the endpoint to test
 
-3) Go to **Services** -> Select **Cloudformation**
+![Cloudformation Output](images/my-inferences-cfn-output.PNG)
 
-4) Select **Create Stack** -> Select **Cloudformation**
 
-   * For **Repository name**: Enter a name (ex. jenkins-byo-scikit-janedoe)
-   * Toggle the **Image scan settings** to **Enabled**  (*This will allow for automatic vulnerability scans against images we push to this repository*)
+## Step 2: Test the API Endpoint
+
+In this step we will use a external Rest API tool like Rest Client or Postman to call the endpoint
+
+1) Download and install the chrome pugin for "Advanced Rest Client"
+2) Open the Advanced Rest Client
+3) Provide the Endpoint URL from the previous step and select the method as Post
+4) Provide the Post body as JSON **{"data": "5.0,3.5,1.3,0.3"}** (Example input format for Iris Classification)
+
+![Rest Client Input](images/rest_client_input.PNG)
+
+5) Verify the output prediction
+
+![Rest Client Input](images/rest_client_output.PNG)
 
 ---
 
 ## Step 5: Clean-Up
 
-If you are performing work in your own AWS Account, please clean up resources you will no longer use to avoid unnecessary charges. 
+If you are performing work in your own AWS Account, please clean up resources you will no longer use to avoid unnecessary charges by deleting the cloudformation stacks. 
 
