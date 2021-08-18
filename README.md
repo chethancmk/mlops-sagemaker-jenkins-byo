@@ -46,7 +46,7 @@ The architecture used for the pipeline steps is shown below:
 
 1) AWS Account & Administrator Access
 2) Please use North Virginia, **us-east-1** for this workshop
-3) This workshop assumes you have an existing installation of Jenkins or Cloudbees.  Because the distributions may vary in look & feel, the instructions may need to be revised for your installation.
+3) This workshop assumes you have an existing installation of Jenkins or Cloudbees if you are running on your own. If running along with AWS as part of an event, you can use the cloudformation to setup a jenkins server
 
 
 ------
@@ -90,7 +90,7 @@ We will create jenkins server from a pre-baked Machine Image. This contains all 
  
 ## Step 2: Create ECR Repo, S3 Buckets and Lambda Function
  
-We will next create the required resources for the Lab which includes a ECR Repository for storing the custom Train/Test Image. S3 Buckets to store the Model Artifact and Training Data. Lambda Function to Evaluate/Test the Model Endpoint along with required Roles.
+We will next create the required resources for the Lab which includes a ECR Repository for storing the custom build docker image used for training and inference. S3 Buckets to store the Model Artifact and Training Data. Lambda Function to Evaluate/Test the Model Endpoint along with required Roles.
 
  1) Download the cloudformation template for [MLOps w/ Jenkins Resources](https://github.com/chethancmk/mlops-sagemaker-jenkins-byo/blob/master/deploy  /cfn_mlops_jenkins_resources.yml) to your local machine.
  2) From your AWS Account, go to **Services**-->**CloudFormation** in the region N Virginia (us-east-1).
@@ -114,7 +114,7 @@ We will next create the required resources for the Lab which includes a ECR Repo
 ---
 
 # Workshop Setup & Preparation - Manual
-Follow these Steps if you are running on your own Cloudformation is not used
+Follow these Steps if you are running on your own and ** Cloudformation is not used**
 
 ## Step 1: Create Elastic Container Registry (ECR)
 
