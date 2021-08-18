@@ -111,13 +111,13 @@ We will next create the required resources for the Lab which includes a ECR Repo
  3) Click  the data bucket created previously ({initials}-jenkins-scikitbyo-data)  
  4) Click on Upload files and select the local train and test files into the bucket. This will be used in the pipeline.
 
- Jump to [Setup Jenkins Pipeline] (https://github.com/chethancmk/mlops-sagemaker-jenkins-byo/blob/master/README.md#build-the-jenkins-pipeline) after this.
+Jump to [Build the Jenkins Pipeline](https://github.com/chethancmk/mlops-sagemaker-jenkins-byo/blob/master/README.md#build-the-jenkins-pipeline) after this.
  
 ---
 
 # Workshop Setup & Preparation - Manual
  
-Only Follow these Steps if you are running on your own and ** Cloudformation is not used** . Otherwise jump to [Setup Jenkins Pipeline](https://github.com/chethancmk/mlops-sagemaker-jenkins-byo/blob/master/README.md#build-the-jenkins-pipeline)
+Only Follow these Steps if you are running on your own and ** Cloudformation is not used** . Otherwise jump to [Build the Jenkins Pipeline](https://github.com/chethancmk/mlops-sagemaker-jenkins-byo/blob/master/README.md#build-the-jenkins-pipeline)
 
 ## Step 1: Create Elastic Container Registry (ECR)
 
