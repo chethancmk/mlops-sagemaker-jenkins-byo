@@ -106,7 +106,7 @@ We will next create the required resources for the Lab which includes a ECR Repo
  
 ## Step 3: Copy Testing and Train Data to the training bucket
 
- 1) Download the train and test csv files to you local machine from [Data Files](https://github.com/chethancmk/mlops-sagemaker-jenkins-byo/tree/master/data) 
+ 1) Download the [train](https://raw.githubusercontent.com/chethancmk/mlops-sagemaker-jenkins-byo/master/data/test.csv) and [test](https://raw.githubusercontent.com/chethancmk/mlops-sagemaker-jenkins-byo/master/data/test.csv) csv files to you local machine 
  2) From your AWS Account, go to **Services**-->**S3**
  3) Click  the data bucket created previously ({initials}-jenkins-scikitbyo-data)  
  4) Click on Upload files and select the local train and test files into the bucket. This will be used in the pipeline.
