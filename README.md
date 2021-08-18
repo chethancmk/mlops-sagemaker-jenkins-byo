@@ -77,7 +77,7 @@ The steps below are included for the setup of AWS resources we will be using in 
 
 We will create jenkins server from a pre-baked Machine Image. This contains all the required plugins and softwares (Docker,Git) preinstalled.
 
- 1) Download the cloudformation template for [Jenkins Server](https://github.com/chethancmk/mlops-sagemaker-jenkins-byo/blob/master/deploy/cfn-jenkins-server.yml) to your  local machine.
+ 1) Download the cloudformation template for [Jenkins Server](https://raw.githubusercontent.com/chethancmk/mlops-sagemaker-jenkins-byo/master/deploy/cfn-jenkins-server.yml) to your  local machine.
  2) From your AWS Account, go to **Services**-->**CloudFormation** in the region N Virginia (us-east-1) 
  3) Select create stack with new resources on the top right hand menu
  4) Select Upload a template file and Click the button to 'Choose File' that you downloaded into your local machine . Click Next
@@ -92,7 +92,7 @@ We will create jenkins server from a pre-baked Machine Image. This contains all 
  
 We will next create the required resources for the Lab which includes a ECR Repository for storing the custom build docker image used for training and inference. S3 Buckets to store the Model Artifact and Training Data. Lambda Function to Evaluate/Test the Model Endpoint along with required Roles.
 
- 1) Download the cloudformation template for [MLOps w/ Jenkins Resources](https://github.com/chethancmk/mlops-sagemaker-jenkins-byo/blob/master/deploy  /cfn_mlops_jenkins_resources.yml) to your local machine.
+ 1) Download the cloudformation template for [MLOps w/ Jenkins Resources](https://raw.githubusercontent.com/chethancmk/mlops-sagemaker-jenkins-byo/master/deploy/cfn_mlops_jenkins_resources.yml) to your local machine.
  2) From your AWS Account, go to **Services**-->**CloudFormation** in the region N Virginia (us-east-1).
  3) Select create stack with new resources on the top right hand menu
  4) Select Upload a template file and Click the button to 'Choose File' that you downloaded into your local machine . Click Next
@@ -339,7 +339,7 @@ This is a bonus step to expose the Inference Endpoint to the external applicatio
 In this step we will load a cloudformation template to create the resources required to expose the endpoint externally
 
 
-1) Download the Cloudformation template locally [API Gateway+Lambda](https://github.com/chethancmk/mlops-sagemaker-jenkins-byo/blob/master/deploy/cfn_mlops_apigw.yml)
+1) Download the Cloudformation template locally [API Gateway+Lambda](https://raw.githubusercontent.com/chethancmk/mlops-sagemaker-jenkins-byo/master/deploy/cfn_mlops_apigw.yml)
 2) Login to the AWS Account provided
 3) Verify you are in **us-east-1/N.Virginia**
 4) Go to **Services** -> Select **Cloudformation**
